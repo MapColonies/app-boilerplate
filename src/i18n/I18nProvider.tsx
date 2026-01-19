@@ -14,6 +14,7 @@ interface I18nContextType {
 
 const I18nContext = createContext<I18nContextType | undefined>(undefined);
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const messages: Record<Locale, any> = {
   en: enMessages,
   he: heMessages,
@@ -31,6 +32,7 @@ export const I18nProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useI18n = (): I18nContextType => {
   const context = useContext(I18nContext);
   if (!context) {
