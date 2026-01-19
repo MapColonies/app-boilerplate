@@ -12,9 +12,6 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
-  define: {
-    'process.env': {},
-  },
   server: {
     port: 3000,
   },
