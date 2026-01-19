@@ -1,0 +1,11 @@
+window._env_ = {
+  LANGUAGE: '{{ getv "/configuration/ui/language" "en" }}',
+  API_URL: '{{ getv "/configuration/api/url" "http://localhost:8080" }}',
+  MAP: {
+    center: {{ getv "/configuration/map/center" "[34.811, 31.908]" }},
+    zoom: {{ getv "/configuration/map/zoom" "14" }},
+  },
+  LOGGER: {
+    level: '{{ getv "/configuration/logger/level" "warn" }}',
+  },
+};
