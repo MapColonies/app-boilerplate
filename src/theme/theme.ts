@@ -1,0 +1,39 @@
+import { createMuiTheme } from '@material-ui/core/styles';
+
+export const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#1976d2',
+      light: '#42a5f5',
+      dark: '#1565c0',
+    },
+    secondary: {
+      main: '#dc004e',
+      light: '#e33371',
+      dark: '#9a0036',
+    },
+    background: {
+      default: '#f5f5f5',
+      paper: '#ffffff',
+    },
+  },
+  typography: {
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+    ].join(','),
+  },
+  direction: 'ltr', // Will be changed dynamically based on language
+});
+
+export const createDirectionalTheme = (direction: 'ltr' | 'rtl') => {
+  return createMuiTheme({
+    ...theme,
+    direction,
+  });
+};

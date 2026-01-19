@@ -1,0 +1,23 @@
+{
+  "app": {
+    "title": "MapColonies App",
+    "welcome": "Welcome to MapColonies App"
+  },
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "map": "Map"
+  },
+  "home": {
+    "title": "Home Page",
+    "description": "This is a boilerplate template for MapColonies applications with Vite, React, TypeScript, Cesium, and i18n support."
+  },
+  "about": {
+    "title": "About Page",
+    "description": "This boilerplate includes routing, theming, Hebrew and English language support, and Cesium integration."
+  },
+  "map": {
+    "title": "Map View",
+    "loading": "Loading map..."
+  }
+}
