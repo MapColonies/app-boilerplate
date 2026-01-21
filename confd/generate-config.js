@@ -1,7 +1,7 @@
 const fs = require('fs');
 const url = require('url');
 const path = require('path');
-const exec = require('child_process').exec;
+const exec = require('child_process').execFile;
 
 let confdUrl =
   'https://github.com/kelseyhightower/confd/releases/download/v0.15.0/confd-0.15.0-windows-amd64.exe';
@@ -35,7 +35,7 @@ const devConfigPath = path.join(confdDevBasePath, 'conf.d/development.toml');
 
 const indexTmplRelPath = 'index.html';
 const indexConfigPath = path.join(confdBasePath, 'index.toml');
-const indexTmplPath = path.join(confdBasePath, !isInDocker ? '/../public/' : '/../dist/', indexTmplRelPath);
+const indexTmplPath = path.join(confdBasePath, !isInDocker ? '/../public/' : '/../html/', indexTmplRelPath);
 const devIndexTmplPath = path.join(confdDevBasePath, '/templates/', indexTmplRelPath);
 const devIndexConfigPath = path.join(confdDevBasePath, 'conf.d/index.toml');
 
@@ -70,11 +70,11 @@ const downloadIfNotExists = (uri, filename) => {
   console.log(`Checking if ${filename} exists`);
   return new Promise(resolve => {
     if (fs.existsSync(filename)) {
-      console.log(`${filename} exists, proceeding to the next stage`);
+      console.log(`File ${filename} exists, proceeding to the next stage`);
       resolve();
       return;
     }
-    console.log(`${filename} does not exist`);
+    console.log(`File ${filename} does not exist`);
     resolve(download(uri, filename));
   });
 };
@@ -91,7 +91,7 @@ const createDirIfNotExists = dir => {
   }
 };
 
-const createDevConfdConfigFile = (env, isInDocker) => {
+const createDevConfdConfigFile = async (env, isInDocker) => {
   createDirIfNotExists(confdDevBasePath);
   createDirIfNotExists(path.join(confdDevBasePath, 'conf.d'));
   createDirIfNotExists(path.join(confdDevBasePath, 'templates'));
@@ -99,32 +99,35 @@ const createDevConfdConfigFile = (env, isInDocker) => {
   if (!env) {
     env = 'default';
   }
-  console.log('Get toml and tmpl files');
-  copyFile(confdTmplPath, devTmplPath);
-  copyFile(confdConfigPath, devConfigPath, data => {
-    const target = 'dest = "' + path.join(confdBasePath, '..', 'dist') + '/'; 
+  console.log('Creating a development toml and tmpl files');
+  const tmplCopy = copyFile(confdTmplPath, devTmplPath);
+  const tomlCopy = copyFile(confdConfigPath, devConfigPath, data => {
+    const target = 'dest = "' + path.join(confdBasePath, '..', 'html') + '/'; 
     return !isInDocker ? data : data.replace('dest = "public/', target);
   });
-  copyFile(indexTmplPath, devIndexTmplPath);
-  copyFile(indexConfigPath, devIndexConfigPath, data => {
-    const target = 'dest = "' + path.join(confdBasePath, '..', 'dist') + '/'; 
+  const indexTmplCopy = copyFile(indexTmplPath, devIndexTmplPath);
+  const indexTomlCopy = copyFile(indexConfigPath, devIndexConfigPath, data => {
+    const target = 'dest = "' + path.join(confdBasePath, '..', 'html') + '/'; 
     return !isInDocker ? data : data.replace('dest = "public/', target);
   });
+
+  return Promise.all([tmplCopy, tomlCopy, indexTmplCopy, indexTomlCopy]);
 };
 
 const replacePlaceHolders = () => {
   return copyFile(indexTmplPath, indexTmplPath, (content) => {
     console.log('**** Replace PLACEHOLDERS by CONFD syntax ****');
     return content
-          .replace(/{PUBLIC_URL_PLACEHOLDER}/g, '{{ getv "/configuration/public/url" "." }}')
-          .replace(/{APP_VERSION_PLACEHOLDER}/g, '{{ getv "/configuration/image/tag" "vUnknown" }}');
+      .replace(/{PUBLIC_URL_PLACEHOLDER}/g, '{{ getv "/configuration/public/url" "." }}')
+      .replace(/{APP_VERSION_PLACEHOLDER}/g, '{{ getv "/configuration/image/tag" "{APP_VERSION_PLACEHOLDER}" }}');
   });
 };
 
 const runConfd = () => {
   console.log('Running confd');
   exec(
-    `${confdPath} -backend env -onetime -confdir ${confdDevBasePath}`,
+    `${confdPath}`,
+    ['-backend', 'env', '-onetime', '-confdir', confdDevBasePath],
     (error, stdout, stderr) => {
       console.log(stdout);
       console.error(stderr);

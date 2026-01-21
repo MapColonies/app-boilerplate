@@ -1,21 +1,21 @@
-FROM node:18-alpine AS prepare
-#download confd 
+FROM node:16.13.0-alpine3.12 AS prepare
+# Download confd 
 RUN apk add --no-cache wget
 RUN mkdir /confd
 RUN wget -O '/confd/confd' 'https://github.com/kelseyhightower/confd/releases/download/v0.15.0/confd-0.15.0-linux-amd64'
 RUN chmod +x /confd/confd
-#build app
-WORKDIR /opt/app
-COPY package*.json ./
-RUN npm ci --legacy-peer-deps
+# Build app
+WORKDIR /opt/myapp
+COPY package*.json yarn.lock ./
+RUN yarn install --production
 COPY . .
-RUN npm run build
+RUN yarn build
 
 
-FROM nginx:1.25-alpine AS production
+FROM nginx:1.19.1-alpine AS production
 # Install Node for running confd
-RUN apk add --no-cache nodejs
-#change nginx config to work without root
+RUN set -eux & apk add --no-cache nodejs
+# Change nginx config to work without root
 RUN sed -i 's/listen       80;/listen       8080;/g' /etc/nginx/conf.d/default.conf  && \
   sed -i '/index  index.html index.htm;/a \        proxy_intercept_errors on;\n        error_page 404 = /index.html;'  /etc/nginx/conf.d/default.conf  && \
   sed -i '/user  nginx;/d' /etc/nginx/nginx.conf && \
@@ -27,7 +27,8 @@ RUN chmod +x /entrypoint.sh
 
 WORKDIR /usr/share/nginx/html
 RUN mkdir public
-COPY --from=prepare /opt/app/dist/ ./
+COPY --from=prepare /opt/myapp/public/ ./
+COPY --from=prepare /opt/myapp/build/ ./
 RUN mv ./confd ../
 COPY --from=prepare /confd/confd ../confd/
 RUN chgrp -R 0 /var/cache/nginx/ && \

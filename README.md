@@ -6,9 +6,7 @@ A comprehensive boilerplate template for MapColonies applications built with Vit
 
 - ⚡ **Vite** - Fast build tool and development server
 - ⚛️ **React 18** with TypeScript
-- 🗺️ **Cesium** - 3D globe and map visualization
 - 🌍 **i18n** - Hebrew and English language support
-- 🎨 **Material-UI** - Component library and theming
 - 🚦 **React Router** - Client-side routing
 - 🐳 **Docker** - Containerization support
 - ⎈ **Helm** - Kubernetes deployment
@@ -19,8 +17,8 @@ A comprehensive boilerplate template for MapColonies applications built with Vit
 
 ### Prerequisites
 
-- Node.js 18+
-- npm or yarn
+- Node.js 16
+- yarn
 
 ### Installation
 
@@ -30,10 +28,13 @@ git clone https://github.com/MapColonies/app-boilerplate.git
 cd app-boilerplate
 
 # Install dependencies
-npm install --legacy-peer-deps
+yarn
+
+# Generate runtime environment variables
+yarn confd
 
 # Start development server
-npm run dev
+yarn start
 ```
 
 The application will be available at http://localhost:3000
@@ -41,76 +42,19 @@ The application will be available at http://localhost:3000
 ### Development
 
 ```bash
-# Run development server
-npm run dev
+yarn global add serve
 
 # Build for production
-npm run build
+yarn build
 
 # Preview production build
-npm run preview
+npx serve -s build
 
 # Lint code
-npm run lint
+yarn eslint:fix
 
 # Format code
-npm run prettier:fix
-```
-
-## Configuration
-
-### Environment Variables
-
-Create a `.env` file in the root directory:
-
-```env
-VITE_APP_TITLE=MapColonies App
-VITE_API_URL=http://localhost:8080
-PUBLIC_URL=/
-```
-
-### Runtime Configuration
-
-The application supports runtime configuration via `confd`. Environment variables are injected at runtime:
-
-- `CONFIGURATION_UI_LANGUAGE` - UI language (en/he)
-- `CONFIGURATION_API_URL` - API endpoint URL
-- `CONFIGURATION_PUBLIC_URL` - Public URL path
-- `CONFIGURATION_MAP_CENTER` - Map center coordinates
-- `CONFIGURATION_MAP_ZOOM` - Default map zoom level
-- `CONFIGURATION_LOGGER_LEVEL` - Log level (warn/info/debug)
-
-## Project Structure
-
-```
-app-boilerplate/
-├── src/
-│   ├── components/        # Reusable components
-│   │   └── Layout/       # Layout component with navigation
-│   ├── config/           # Configuration files
-│   ├── i18n/             # Internationalization
-│   │   ├── locales/      # Translation files (en, he)
-│   │   └── I18nProvider.tsx
-│   ├── pages/            # Page components
-│   │   ├── Home/
-│   │   ├── About/
-│   │   └── MapView/      # Cesium map integration
-│   ├── routes/           # Route configuration
-│   ├── theme/            # Theme configuration
-│   ├── App.tsx
-│   └── main.tsx
-├── helm/                 # Helm charts for Kubernetes
-│   ├── templates/
-│   ├── Chart.yaml
-│   └── values.yaml
-├── confd/                # Runtime configuration
-│   ├── generate-config.js
-│   ├── production.tmpl
-│   ├── production.toml
-│   └── index.toml
-├── Dockerfile
-├── docker-compose.yml
-└── vite.config.ts
+yarn prettier:fix
 ```
 
 ## Docker
@@ -122,9 +66,8 @@ app-boilerplate/
 docker build -t app-boilerplate .
 
 # Run container
-docker run -p 8080:8080 \
-  -e CONFIGURATION_UI_LANGUAGE=en \
-  -e CONFIGURATION_API_URL=http://api.example.com \
+docker run -p 3000:8080 \
+  -e CONFIGURATION_LANGUAGE=en \
   app-boilerplate
 ```
 
@@ -137,8 +80,7 @@ docker run -p 8080:8080 \
 helm install app-boilerplate ./helm \
   --set image.repository=your-registry/app-boilerplate \
   --set image.tag=latest \
-  --set env.language=en \
-  --set env.apiUrl=http://api.example.com
+  --set env.language=en
 
 # Upgrade the deployment
 helm upgrade app-boilerplate ./helm
@@ -165,9 +107,28 @@ const Component = () => {
 };
 ```
 
-## Cesium Integration
+## Deployment
 
-The MapView component demonstrates Cesium integration. Customize the map in `src/pages/MapView/MapView.tsx`.
+> [!IMPORTANT] 
+> We depend on `Red-Hat Yaml Extension` for validating the values files against the relevant schemas from helm-common.
+> That means, you should install the extension from vscode in order to be able to edit values files according to our schemas.
+
+To update helm dependencies
+```bash
+yarn helm-update
+```
+
+In order to create/renew values schemas 
+```bash
+yarn helm-assets
+```
+
+To deploy: helm values **MUST** be combined from global.yaml and values.yaml (use npm script!)
+```bash
+yarn helm-install
+```
+
+See [helm values](https://github.com/MapColonies/helm-common/blob/c352a2453117895ec0f9df0267a66d6f5b9c2da2/README.md)
 
 ## Release Management
 
