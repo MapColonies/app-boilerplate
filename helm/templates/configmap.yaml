@@ -13,6 +13,7 @@
   CONFIGURATION_ACCESS_TOKEN_INJECTION_TYPE: {{ quote .Values.global.shared.accessToken.injectionType }}
   CONFIGURATION_IMAGE_TAG: {{ quote .Values.configValues.image.tag }}
   CONFIGURATION_PUBLIC_URL: {{ quote .Values.env.publicUrl }}
+  CONFIGURATION_LANGUAGE: {{ quote .Values.env.language }}
   CONFIGURATION_MAP_CENTER: {{ quote .Values.env.map.center }}
   CONFIGURATION_MAP_ZOOM: {{ quote .Values.env.map.zoom }}
   CONFIGURATION_BASE_MAPS: {{ quote .Values.env.baseMaps }}

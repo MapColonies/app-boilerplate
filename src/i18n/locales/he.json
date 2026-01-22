@@ -10,11 +10,11 @@
   },
   "home": {
     "title": "דף הבית",
-    "description": "זוהי תבנית boilerplate עבור אפליקציות MapColonies עם Vite, React, TypeScript, Cesium ותמיכה ב-i18n."
+    "description": "זוהי תבנית boilerplate עבור אפליקציות MapColonies עם React, TypeScript ותמיכה ב-i18n."
   },
   "about": {
     "title": "דף אודות",
-    "description": "תבנית זו כוללת ניתוב, עיצוב, תמיכה בעברית ובאנגלית ואינטגרציה עם Cesium."
+    "description": "תבנית זו כוללת ניתוב, עיצוב, תמיכה בעברית ובאנגלית."
   },
   "map": {
     "title": "תצוגת מפה",

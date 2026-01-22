@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
 import type { ReactNode } from 'react';
 import { IntlProvider } from 'react-intl';
-import config from '../config/config';
+import appConfig from '../Utils/Config';
 import enMessages from './locales/en.json';
 import heMessages from './locales/he.json';
 
@@ -21,11 +21,11 @@ const messages: Record<Locale, any> = {
 };
 
 export const I18nProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [locale, setLocale] = useState<Locale>((config.language as Locale) || 'en');
+  const [locale, setLocale] = useState<Locale>((appConfig.language as Locale) || 'he');
 
   return (
     <I18nContext.Provider value={{ locale, setLocale }}>
-      <IntlProvider locale={locale} messages={messages[locale]} defaultLocale="en">
+      <IntlProvider locale={locale} messages={messages[locale]} defaultLocale="he">
         {children}
       </IntlProvider>
     </I18nContext.Provider>

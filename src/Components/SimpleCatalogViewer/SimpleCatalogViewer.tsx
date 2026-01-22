@@ -9,7 +9,8 @@ import {
   CesiumSceneMode
 } from '@map-colonies/react-components';
 import { useQueryParams } from '../../Hooks/useQueryParams';
-import appConfig, { LinkType } from '../../Utils/Config';
+import appConfig from '../../Utils/Config';
+import { LinkType } from '../../Utils/Const';
 import Terrain from '../Terrain/Terrain';
 import { getFootprintsCollection } from './utils';
 import { getRecordsQueryByID, parseQueryResults } from './utils/cswQueryBuilder';
@@ -100,13 +101,13 @@ const SimpleCatalogViewer: React.FC = (): JSX.Element => {
         params: Record<string, unknown>
       ): Promise<AxiosResponse> =>
         requestHandlerWithToken(
-          appConfig.simpleCatalogViewerTool.csw3dUrl,
+          appConfig.csw3dUrl,
           method,
           params,
           userToken
         );
 
-      cswRequestHandler(appConfig.simpleCatalogViewerTool.csw3dUrl, "POST", {
+      cswRequestHandler(appConfig.csw3dUrl, "POST", {
         data: getRecordsQueryByID(modelIds, "http://schema.mapcolonies.com/3d")
       })
         .then((res) => {

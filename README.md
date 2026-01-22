@@ -1,10 +1,9 @@
 # MapColonies App Boilerplate
 
-A comprehensive boilerplate template for MapColonies applications built with Vite, React, TypeScript, Cesium, and i18n support.
+A comprehensive boilerplate template for MapColonies applications built with React, TypeScript and i18n support.
 
 ## Features
 
-- ⚡ **Vite** - Fast build tool and development server
 - ⚛️ **React 18** with TypeScript
 - 🌍 **i18n** - Hebrew and English language support
 - 🚦 **React Router** - Client-side routing

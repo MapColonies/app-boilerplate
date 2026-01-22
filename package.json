@@ -1,7 +1,7 @@
 {
   "name": "app-boilerplate",
   "version": "1.0.0",
-  "description": "MapColonies React TypeScript Vite boilerplate with i18n, routing, and Helm",
+  "description": "MapColonies React TypeScript boilerplate with i18n, routing, and Helm",
   "repository": {
     "type": "git",
     "url": "https://github.com/MapColonies/app-boilerplate.git"
@@ -79,7 +79,6 @@
     "@map-colonies/react-components": "^4.13.3",
     "@map-colonies/react-core": "^4.2.0",
     "@map-colonies/static-assets": "^0.5.1",
-    "@material-ui/core": "^4.11.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
