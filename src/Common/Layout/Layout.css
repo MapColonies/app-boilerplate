@@ -48,8 +48,8 @@
 }
 
 .dark-theme .icon {
-  border-style: outset;
   border-width: 0;
+  background: none;
   color: var(--mdc-theme-text-icon-on-dark);
   cursor: pointer;
 }
