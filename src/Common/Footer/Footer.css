@@ -6,6 +6,10 @@
   height: 52px;
 }
 
+body[dir='rtl'] .Footer {
+  flex-direction: row-reverse;
+}
+
 .Footer .icon {
   margin: 0 10px;
   font-size: x-large;
