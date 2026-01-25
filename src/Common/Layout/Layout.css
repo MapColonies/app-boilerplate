@@ -5,6 +5,7 @@
   grid-template-rows: 5% 90% 5%;
   grid-template-columns: repeat(3, 1fr);
   background-color: var(--background);
+  color: var(--mdc-theme-on-primary);
 }
 
 .Layout > header,
@@ -44,4 +45,11 @@
 .dark-theme .mdc-dialog .mdc-dialog__content {
   color: rgba(var(--mdc-theme-on-surface),.7);
   padding: 0 20px;
+}
+
+.dark-theme .icon {
+  border-style: outset;
+  border-width: 0;
+  color: var(--mdc-theme-text-icon-on-dark);
+  cursor: pointer;
 }

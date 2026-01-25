@@ -1,6 +1,7 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { Box } from '@map-colonies/react-components';
+import Main from '../../Components/Main/Main';
 import PageNotFound from '../PageNotFound/PageNotFound';
 
 import './Routing.css';
@@ -17,9 +18,8 @@ const Routing: React.FC = (): JSX.Element => {
           <Redirect to="/index" />
         </Route>
 
-        {/* Home */}
         <Route path="/index">
-          {/* <Home /> */}
+          <Main />
         </Route>
 
         <Route path="*">
