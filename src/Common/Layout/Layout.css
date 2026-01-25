@@ -4,7 +4,7 @@
   display: grid;
   grid-template-rows: 5% 90% 5%;
   grid-template-columns: repeat(3, 1fr);
-  background-color: var(--background);
+  background-color: var(--mdc-theme-background);
   color: var(--mdc-theme-on-primary);
 }
 
