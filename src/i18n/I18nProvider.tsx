@@ -32,7 +32,6 @@ export const I18nProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   );
 };
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const useI18n = (): I18nContextType => {
   const context = useContext(I18nContext);
   if (!context) {

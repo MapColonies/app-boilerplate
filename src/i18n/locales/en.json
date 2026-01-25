@@ -1,6 +1,3 @@
 {
-  "app": {
-    "title": "MapColonies App",
-    "welcome": "Welcome to MapColonies App"
-  }
+  "app.title": "MapColonies App"
 }

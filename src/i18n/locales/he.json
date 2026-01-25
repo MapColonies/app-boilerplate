@@ -1,6 +1,3 @@
 {
-  "app": {
-    "title": "אפליקציית MapColonies",
-    "welcome": "ברוכים הבאים לאפליקציית MapColonies"
-  }
+  "app.title": "אפליקציית MapColonies"
 }
