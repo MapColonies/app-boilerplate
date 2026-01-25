@@ -2,12 +2,8 @@ import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { Box } from '@map-colonies/react-components';
 import PageNotFound from '../PageNotFound/PageNotFound';
-// import SimpleCatalogViewer from '../SimpleCatalogViewer/SimpleCatalogViewer';
-// import TerrainVerification from '../TerrainVerification/TerrainVerification';
-// import Tools from '../Tools/Tools';
 
 import './Routing.css';
-
 
 const Routing: React.FC = (): JSX.Element => {
 
@@ -21,20 +17,10 @@ const Routing: React.FC = (): JSX.Element => {
           <Redirect to="/index" />
         </Route>
 
-        {/* Tools */}
+        {/* Home */}
         <Route path="/index">
-          {/* <Tools /> */}
+          {/* <Home /> */}
         </Route>
-
-        {/* Terrain Verification */}
-        {/* <Route path="/terrain-verification">
-          <TerrainVerification />
-        </Route> */}
-
-        {/* Simple Catalog Viewer */}
-        {/* <Route path="/simple-catalog-viewer">
-          <SimpleCatalogViewer />
-        </Route> */}
 
         <Route path="*">
           <PageNotFound />
