@@ -2,15 +2,17 @@ import React, { useEffect } from 'react';
 import { RMWCProvider, ThemeProvider as RMWCThemeProvider, Themes } from '@map-colonies/react-core';
 import { Box } from '@map-colonies/react-components';
 import version from '../../../package.json';
+import { useI18n } from '../../i18n/I18nProvider';
 import Header from '../Header/Header';
 import Routing from '../Routing/Routing';
 
 import './Layout.css';
 
 const Layout: React.FC = (): JSX.Element => {
+  const { locale } = useI18n();
 
   useEffect(() => {
-    document.title = `Web Tools App - v${version.version}`;
+    document.title = `MapColonies App - v${version.version}`;
   }, []);
 
   const camelize = (value: string): string => {
@@ -70,10 +72,9 @@ const Layout: React.FC = (): JSX.Element => {
         ),
       }}
     >
-
       <RMWCThemeProvider className={`${theme.type}-theme`} options={theme}>
 
-        <Box className="Layout">
+        <Box className="Layout" dir={locale === 'he' ? 'rtl' : 'ltr'}>
 
           <header>
             <Header />
@@ -85,11 +86,10 @@ const Layout: React.FC = (): JSX.Element => {
 
           <footer>
           </footer>
-          
+
         </Box>
 
       </RMWCThemeProvider>
-
     </RMWCProvider>
   );
   

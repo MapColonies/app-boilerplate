@@ -2,22 +2,5 @@
   "app": {
     "title": "אפליקציית MapColonies",
     "welcome": "ברוכים הבאים לאפליקציית MapColonies"
-  },
-  "navigation": {
-    "home": "דף הבית",
-    "about": "אודות",
-    "map": "מפה"
-  },
-  "home": {
-    "title": "דף הבית",
-    "description": "זוהי תבנית boilerplate עבור אפליקציות MapColonies עם React, TypeScript ותמיכה ב-i18n."
-  },
-  "about": {
-    "title": "דף אודות",
-    "description": "תבנית זו כוללת ניתוב, עיצוב, תמיכה בעברית ובאנגלית."
-  },
-  "map": {
-    "title": "תצוגת מפה",
-    "loading": "טוען מפה..."
   }
 }

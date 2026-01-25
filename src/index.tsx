@@ -1,6 +1,7 @@
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import Layout from './Components/Layout/Layout';
+import { I18nProvider } from './i18n/I18nProvider';
 import reportWebVitals from './reportWebVitals';
 import appConfig from './Utils/Config';
 
@@ -11,7 +12,9 @@ const root = createRoot(container!);
 
 root.render(
   <BrowserRouter basename={appConfig.publicUrl}>
-    <Layout />
+    <I18nProvider>
+      <Layout />
+    </I18nProvider>
   </BrowserRouter>
 );
 
