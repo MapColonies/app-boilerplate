@@ -102,7 +102,7 @@ import { useIntl } from 'react-intl';
 
 const Component = () => {
   const intl = useIntl();
-  return <h1>{intl.formatMessage({ id: 'home.title' })}</h1>;
+  return <h1>{intl.formatMessage({ id: 'app.title' })}</h1>;
 };
 ```
 
