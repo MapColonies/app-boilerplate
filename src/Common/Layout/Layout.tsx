@@ -62,6 +62,12 @@ const Layout: React.FC = (): JSX.Element => {
     ...(Object.fromEntries(Object.entries(CustomTheme.darkTheme).map(([key, value]) => [camelize(key), value])))
   };
 
+  ((): void => {
+    if (locale === 'he') {
+      document.body.dir = 'rtl';
+    }
+  })();
+
   return (
     <RMWCProvider
       typography={{
@@ -75,7 +81,7 @@ const Layout: React.FC = (): JSX.Element => {
     >
       <RMWCThemeProvider className={`${theme.type}-theme`} options={theme}>
 
-        <Box className="Layout" dir={locale === 'he' ? 'rtl' : 'ltr'}>
+        <Box className="Layout">
 
           <header>
             <Header />
