@@ -20,6 +20,7 @@ git checkout -b feature/your-feature-name
 ```
 
 Branch naming conventions:
+
 - `feature/` - New features
 - `fix/` - Bug fixes
 - `docs/` - Documentation changes
@@ -45,6 +46,7 @@ We follow the [Conventional Commits](https://www.conventionalcommits.org/) speci
 ```
 
 Types:
+
 - `feat:` - A new feature
 - `fix:` - A bug fix
 - `docs:` - Documentation changes
@@ -54,6 +56,7 @@ Types:
 - `chore:` - Maintenance tasks
 
 Examples:
+
 ```
 feat: add dark mode theme support
 fix: resolve routing issue on refresh
