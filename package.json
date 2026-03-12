@@ -1,6 +1,6 @@
 {
   "name": "app-boilerplate",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "MapColonies React TypeScript boilerplate with i18n, routing, and Helm",
   "repository": {
     "type": "git",
