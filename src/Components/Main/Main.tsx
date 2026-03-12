@@ -9,7 +9,7 @@ const Main: React.FC = (): JSX.Element => {
   return (
     <Box className="Main">
       <Typography tag="div" className="Content">
-        <FormattedMessage id='app.welcome' />
+        <FormattedMessage id="app.welcome" />
       </Typography>
     </Box>
   );

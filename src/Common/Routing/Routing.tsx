@@ -7,12 +7,9 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 import './Routing.css';
 
 const Routing: React.FC = (): JSX.Element => {
-
   return (
     <Box className="Routing">
-
       <Switch>
-
         {/* Default Route */}
         <Route path="/" exact>
           <Redirect to="/index" />
@@ -25,12 +22,9 @@ const Routing: React.FC = (): JSX.Element => {
         <Route path="*">
           <PageNotFound />
         </Route>
-        
       </Switch>
-      
     </Box>
   );
-  
 };
 
 export default Routing;
